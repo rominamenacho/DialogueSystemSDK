@@ -1,8 +1,23 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using DialogSystem.Data.DTO;
 
-public class JsonVoiceLoader
+namespace DialogSystem.Data
 {
-	public JsonVoiceLoader()
-	{
-	}
+    public sealed class JsonVoiceLoader
+    {
+        public Dictionary<string, string> Load(TextAsset jsonFile)
+        {
+            var wrapper = JsonUtility.FromJson<VoiceWrapper>(jsonFile.text);
+
+            var dict = new Dictionary<string, string>();
+
+            foreach (var entry in wrapper.entries)
+            {
+                dict[entry.key] = entry.audioKey;
+            }
+
+            return dict;
+        }
+    }
 }

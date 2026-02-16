@@ -1,8 +1,11 @@
 ﻿using System;
-
-public class JsonVoiceProvider
+namespace DialogSystem.Voice
 {
-    public JsonVoiceProvider()
+
+    public class JsonVoiceProvider : IVoiceProvider
     {
+        public JsonVoiceProvider()
+        {
+        }
     }
 }

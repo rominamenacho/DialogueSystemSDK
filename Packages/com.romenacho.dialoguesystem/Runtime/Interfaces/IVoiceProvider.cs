@@ -1,7 +1,9 @@
-﻿using System;
-
-public interface IVoceProvider
+﻿namespace DialogSystem.Interfaces
 {
-	//AudioClip GetAudioClip(string lineId);
-	float GetDuration(string lineId);
+    public interface IVoiceProvider
+    {
+        void Play(string lineId);
+        bool HasVoice(string lineId);
+        void Stop();
+    }
 }

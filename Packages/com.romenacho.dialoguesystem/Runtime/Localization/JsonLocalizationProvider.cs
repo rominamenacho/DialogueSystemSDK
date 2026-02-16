@@ -1,8 +1,12 @@
 ﻿using System;
 
-public class JsonLocalizationProvider 
+namespace DialogSystem.Localization
 {
-	public JsonLocalizationProvider()
+
+	public class JsonLocalizationProvider : ILocalizationProvider
 	{
+		public JsonLocalizationProvider()
+		{
+		}
 	}
 }

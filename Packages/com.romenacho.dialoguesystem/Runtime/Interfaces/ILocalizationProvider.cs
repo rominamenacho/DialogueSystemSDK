@@ -1,6 +1,8 @@
-﻿using System;
-
-public interface ILocalizationProvider
+﻿namespace DialogSystem.Interfaces
 {
-	string GetText(string lineId);
+    public interface ILocalizationProvider
+    {
+        string GetText(string lineId);
+        bool Contains(string lineId);
+    }
 }

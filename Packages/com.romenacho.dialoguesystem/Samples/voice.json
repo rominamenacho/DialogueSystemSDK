@@ -1,0 +1,10 @@
+{
+  "CH1_INTRO_001": {
+    "audioKey": "VO_CH1_001",
+    "duration": null
+  },
+  "CH1_INTRO_002": {
+    "audioKey": "VO_CH1_002",
+    "duration": 30
+  }
+}

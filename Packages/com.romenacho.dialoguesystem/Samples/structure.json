@@ -1,0 +1,20 @@
+{
+  "chapters": [
+    {
+      "chapterId": "CH1",
+      "blocks": [
+        {
+          "blockId": "INTRO",
+          "lines": [
+            {
+              "lineId": "CH1_INTRO_001"
+            },
+            {
+              "lineId": "CH1_INTRO_002"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

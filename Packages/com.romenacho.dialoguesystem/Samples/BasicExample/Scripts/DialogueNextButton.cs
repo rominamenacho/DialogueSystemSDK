@@ -1,10 +1,11 @@
+﻿using DialogSystem.Player;
+using DialogSystem.Presentation;
 using UnityEngine;
 
 public class DialogueNextButton : MonoBehaviour
 {
-   {
-    [SerializeField] private DialogueRunner runner;
-    [SerializeField] private TypewriterController typewriter;
+    public DialogueRunner runner;
+    public TypewriterController typewriter;
 
     public void OnClick()
     {
@@ -13,5 +14,6 @@ public class DialogueNextButton : MonoBehaviour
         else
             runner.Next();
     }
+
 }
 

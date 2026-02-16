@@ -37,6 +37,7 @@ namespace DialogSystem.Player
 
         public void Next()
         {
+
             if (!IsRunning)
                 return;
 

@@ -654,7 +654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: DialogueSystem.Runtime::DialogSystem.Presentation.TypewriterController
   textComponent: {fileID: 1538860217}
-  charactersPerSecond: 30
+  charactersPerSecond: 10
 --- !u!224 &1478538825
 RectTransform:
   m_ObjectHideFlags: 0
@@ -823,6 +823,7 @@ GameObject:
   - component: {fileID: 1655174047}
   - component: {fileID: 1655174046}
   - component: {fileID: 1655174045}
+  - component: {fileID: 1655174048}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -893,7 +894,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1655174046}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1655174046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,6 +945,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655174043}
   m_CullTransparentMesh: 1
+--- !u!114 &1655174048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655174043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f834912cd1039428f5316fa714d948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: BasicExample::DialogueNextButton
+  runner: {fileID: 2093704425}
+  typewriter: {fileID: 1478538824}
 --- !u!1 &2093704423
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,37 +1017,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2097974616
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2097974617}
-  m_Layer: 0
-  m_Name: demoBootstrap
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2097974617
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097974616}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1115,4 +1111,3 @@ SceneRoots:
   - {fileID: 1478538825}
   - {fileID: 594314280}
   - {fileID: 2144298565}
-  - {fileID: 2097974617}

@@ -4,7 +4,7 @@ using DialogSystem.Data.DTO;
 
 namespace DialogSystem.Data
 {
-    public sealed class JsonLocalizationLoader
+    public class JsonLocalizationLoader
     {
         public Dictionary<string, string> Load(TextAsset jsonFile)
         {

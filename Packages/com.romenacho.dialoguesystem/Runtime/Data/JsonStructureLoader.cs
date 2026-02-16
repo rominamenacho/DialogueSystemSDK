@@ -5,7 +5,7 @@ using DialogSystem.Data.DTO;
 
 namespace DialogSystem.Data
 {
-    public sealed class JsonStructureLoader
+    public class JsonStructureLoader
     {
         public DialogueChapter Load(TextAsset jsonFile)
         {

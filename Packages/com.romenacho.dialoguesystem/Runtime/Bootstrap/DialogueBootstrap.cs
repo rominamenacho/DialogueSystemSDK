@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-using DialogSystem.Core;
+﻿using DialogSystem.Core;
 using DialogSystem.Data;
 using DialogSystem.Interfaces;
 using DialogSystem.Localization;
-using DialogSystem.Voice;
 using DialogSystem.Player;
+using DialogSystem.Voice;
+using UnityEngine;
 
 namespace DialogSystem.Bootstrap
 {
@@ -61,6 +61,7 @@ namespace DialogSystem.Bootstrap
             runner.Initialize(chapter, localizationProvider, voiceProvider);
 
             runner.OnLineStarted += typewriter.Play;
+            StartDialogue();
         }
 
         public void StartDialogue()

@@ -2,8 +2,8 @@
   "name": "com.romenacho.dialoguesystem",
   "version": "1.0.0",
   "displayName": "Dialogue System",
-  "description": "Data-driven dialogue system with localization and voice support.",
-  "unity": "6000.0",
+  "description": "Lightweight dialogue system with localization and voice support.",
+  "unity": "2021.3",
   "author": {
     "name": "Romina Menacho"
   }

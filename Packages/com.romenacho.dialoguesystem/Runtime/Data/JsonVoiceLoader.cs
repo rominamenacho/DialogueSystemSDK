@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using DialogSystem.Data.DTO;
+using System.Collections.Generic;
 using UnityEngine;
-using DialogSystem.Data.DTO;
 
 namespace DialogSystem.Data
 {
-    public sealed class JsonVoiceLoader
+    public class JsonVoiceLoader
     {
         public Dictionary<string, string> Load(TextAsset jsonFile)
         {

@@ -1,16 +1,35 @@
 using UnityEngine;
+using DialogSystem.Core;
+using DialogSystem.Localization;
+using DialogSystem.Voice;
+using DialogSystem.Presentation;
+using DialogSystem.Data;
 
-public class DemoBootstrap : MonoBehaviour
+public class DialogueBootstrap : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [Header("References")]
+    [SerializeField] private DialogueRunner runner;
+    [SerializeField] private TypewriterController typewriter;
+    [SerializeField] private JsonStructureLoader structureLoader;
+    [SerializeField] private JsonLocalizationProvider localizationProvider;
+    [SerializeField] private JsonVoiceProvider voiceProvider;
 
-    // Update is called once per frame
-    void Update()
+    [Header("JSON Files")]
+    [SerializeField] private TextAsset structureJson;
+    [SerializeField] private TextAsset localizationJson;
+    [SerializeField] private TextAsset voiceJson;
+
+    private void Start()
     {
-        
+        var structure = structureLoader.Load(structureJson);
+        localizationProvider.Load(localizationJson);
+        voiceProvider.Load(voiceJson);
+
+        runner.Initialize(structure, localizationProvider, voiceProvider);
+
+        runner.OnLineStarted += typewriter.Play;
+
+        runner.StartChapter("CH1");
     }
 }
+

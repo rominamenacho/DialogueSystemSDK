@@ -1,7 +1,7 @@
-﻿using System;
-using UnityEngine;
-using DialogSystem.Core;
+﻿using DialogSystem.Core;
 using DialogSystem.Interfaces;
+using System;
+using UnityEngine;
 
 namespace DialogSystem.Player
 {
@@ -54,7 +54,7 @@ namespace DialogSystem.Player
 
         private void PlayCurrentLine()
         {
-            var lineId = _graph.CurrentLine.LineId;
+            var lineId = _graph.CurrentLine.Id;
 
             string text = _localization.GetText(lineId);
 

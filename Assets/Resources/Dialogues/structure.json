@@ -1,0 +1,55 @@
+{
+  "chapters": [
+    {
+      "chapterId": "CH1",
+      "startBlockId": "INTRO",
+      "blocks": [
+        {
+          "blockId": "INTRO",
+          "lines": [
+            {
+              "lineId": "CH1_INTRO_001"
+            },
+            {
+              "lineId": "CH1_INTRO_002"
+            },
+            {
+              "lineId": "CH1_INTRO_003"
+            },
+            {
+              "lineId": "CH1_INTRO_004"
+            },
+            {
+              "lineId": "CH1_INTRO_005"
+            },
+            {
+              "lineId": "CH1_INTRO_006"
+            }
+
+          ]
+        }
+      ]
+    },
+{
+      "chapterId": "CH2",
+      "startBlockId": "END",
+      "blocks": [
+        {
+          "blockId": "END",
+          "lines": [
+            {
+              "lineId": "CH2_END_001"
+            },
+            {
+              "lineId": "CH2_END_002"
+            },
+            {
+              "lineId": "CH2_END_003"
+            }
+
+          ]
+        }
+      ]
+    }
+  ]
+}

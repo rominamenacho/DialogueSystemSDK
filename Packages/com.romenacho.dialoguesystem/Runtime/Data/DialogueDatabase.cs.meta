@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: beaa138d2f1aa144e983841caab7633a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - structureJson: {fileID: 4900000, guid: 993014b9c9b1f174885f6f49863ddc46, type: 3}
+  - localizationJson: {fileID: 4900000, guid: a1ea07a3745b7e04dbefbabd6e692a1a, type: 3}
+  - voiceJson: {fileID: 4900000, guid: 9d2a2e4e49d16294f93989cbd61a877a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

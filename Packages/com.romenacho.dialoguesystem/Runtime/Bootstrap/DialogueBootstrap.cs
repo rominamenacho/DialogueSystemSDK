@@ -9,10 +9,8 @@ namespace DialogSystem.Bootstrap
 {
     public sealed class DialogueBootstrap : MonoBehaviour
     {
-        [Header("JSON Files")]
-        [SerializeField] private TextAsset structureJson;
-        [SerializeField] private TextAsset localizationJson;
-        [SerializeField] private TextAsset voiceJson;
+        [SerializeField] private DialogueDatabase database;
+
 
         [Header("Audio")]
         [SerializeField] private AudioSource audioSource;
@@ -28,25 +26,31 @@ namespace DialogSystem.Bootstrap
 
         private void Awake()
         {
+
+            if (database == null)
+                throw new System.Exception("DialogueDatabase not found in Resources.");
+
             Initialize();
         }
 
+
         private void Initialize()
         {
-            if (structureJson == null || localizationJson == null)
+            if (database.structureJson == null || database.localizationJson == null)
             {
-                Debug.LogError("DialogueBootstrap: Missing required JSON files.");
+                Debug.LogError("DialogueBootstrap: Missing required JSON files in DialogueDatabase.");
                 return;
             }
 
+
             // ---- LOAD LOCALIZATION ----
             var localizationLoader = new JsonLocalizationLoader();
-            var localizationDict = localizationLoader.Load(localizationJson);
+            var localizationDict = localizationLoader.Load(database.localizationJson);
 
             // ---- LOAD STRUCTURE ----
             var structureLoader = new JsonStructureLoader();
 
-            var chapters = structureLoader.Load(structureJson, localizationDict);
+            var chapters = structureLoader.Load(database.structureJson, localizationDict);
 
             ILocalizationProvider localizationProvider =
                 new JsonLocalizationProvider(localizationDict);
@@ -54,10 +58,10 @@ namespace DialogSystem.Bootstrap
             // ---- LOAD VOICE (optional) ----
             IVoiceProvider voiceProvider = null;
 
-            if (voiceJson != null && audioSource != null)
+            if (database.voiceJson != null && audioSource != null)
             {
                 var voiceLoader = new JsonVoiceLoader();
-                var voiceDict = voiceLoader.Load(voiceJson);
+                var voiceDict = voiceLoader.Load(database.voiceJson);
 
                 voiceProvider = new JsonVoiceProvider(voiceDict, audioSource);
             }
@@ -72,6 +76,8 @@ namespace DialogSystem.Bootstrap
 
         }
 
+
+
         public void StartDialogue(string chapter, string blockId = null)
         {
             if (string.IsNullOrEmpty(chapter))
@@ -82,7 +88,7 @@ namespace DialogSystem.Bootstrap
             runner.StartDialogue(chapter, blockId);
         }
 
-         public void Next()
+        public void Next()
         {
             runner.Next();
         }

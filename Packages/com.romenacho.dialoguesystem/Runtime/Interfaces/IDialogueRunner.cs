@@ -1,6 +1,22 @@
-﻿using System;
+﻿using DialogSystem.Core;
+using System;
+using System.Collections.Generic;
 
-public interface IDialogueRunner
+namespace DialogSystem.Interfaces
 {
-	
+    public interface IDialogueRunner
+    {
+        event Action<string> OnLineStarted;
+        event Action OnDialogueFinished;
+
+        void Initialize(
+            Dictionary<string, DialogueChapter> chapters,
+            ILocalizationProvider localizationProvider,
+            IVoiceProvider voiceProvider);
+
+        void StartDialogue(string chapterId, string startBlockId = null);
+        void Next();
+
+        bool IsRunning { get; }
+    }
 }

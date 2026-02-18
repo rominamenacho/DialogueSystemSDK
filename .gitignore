@@ -6,3 +6,5 @@
 /[Vv]s/
 *.csproj
 *.sln
+.vs/DialogSystemSDK/CopilotIndices
+.vs

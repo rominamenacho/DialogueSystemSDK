@@ -14,6 +14,16 @@ namespace DialogSystem.Core
             _currentLineIndex = 0;
         }
 
+        // New ctor: start at specific block id (falls back to StartBlock)
+        public DialogueGraph(DialogueChapter chapter, string startBlockId)
+        {
+            _chapter = chapter ?? throw new System.ArgumentNullException(nameof(chapter));
+            _currentBlock = !string.IsNullOrEmpty(startBlockId)
+                ? chapter.GetBlock(startBlockId) ?? chapter.GetStartBlock()
+                : chapter.GetStartBlock();
+            _currentLineIndex = 0;
+        }
+
         public DialogueLine CurrentLine =>
             _currentBlock.Lines[_currentLineIndex];
 
@@ -22,8 +32,8 @@ namespace DialogSystem.Core
 
         public void MoveNext()
         {
-            if (!HasNextLine)
-                return;
+            if (!HasNextLine) return;
+
 
             _currentLineIndex++;
         }

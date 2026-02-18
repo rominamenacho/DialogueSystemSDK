@@ -35,13 +35,13 @@ namespace DialogSystem.Bootstrap
                 return;
             }
 
-            // ---- LOAD STRUCTURE ----
-            var structureLoader = new JsonStructureLoader();
-            DialogueChapter chapter = structureLoader.Load(structureJson);
-
             // ---- LOAD LOCALIZATION ----
             var localizationLoader = new JsonLocalizationLoader();
             var localizationDict = localizationLoader.Load(localizationJson);
+
+            // ---- LOAD STRUCTURE ----
+            var structureLoader = new JsonStructureLoader();
+            DialogueChapter chapter = structureLoader.Load(structureJson, localizationDict);
 
             ILocalizationProvider localizationProvider =
                 new JsonLocalizationProvider(localizationDict);
@@ -67,6 +67,12 @@ namespace DialogSystem.Bootstrap
         public void StartDialogue()
         {
             runner.StartDialogue();
+        }
+
+        // New convenience method to start a specific block
+        public void StartDialogue(string blockId)
+        {
+            runner.StartDialogue(blockId);
         }
 
         public void Next()

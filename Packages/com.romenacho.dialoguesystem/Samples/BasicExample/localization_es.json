@@ -1,6 +1,8 @@
 {
-  "entries": [
-    { "key": "CH1_INTRO_001", "value": "Ejemplo español" },
-    { "key": "CH1_INTRO_002", "value": "Ejemplo español 2" }
-  ]
+  "CH1_INTRO_001": "Ejemplo español",
+  "CH1_INTRO_002": "Ejemplo español 2",
+  "CH1_INTRO_003": "Ejemplo español 3",
+  "CH1_INTRO_004": "Ejemplo español 4",
+  "CH1_INTRO_005": "Ejemplo español 5",
+  "CH1_INTRO_006": "Ejemplo español 6"
 }

@@ -1,36 +1,85 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using DialogSystem.Player;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 
 namespace DialogSystem.Presentation
 {
-    using System.Collections;
-    using UnityEngine;
-
-    public sealed class TypewriterController : MonoBehaviour
+    public class TypewriterController : MonoBehaviour
     {
-        [Header("UI")]
-        [SerializeField] private TMP_Text textComponent;
+        [SerializeField] private TMP_Text textUI;
+        [SerializeField] private float typingSpeed = 0.03f;
+        [SerializeField] private int maxVisibleLines = 2;
 
-        [Header("Settings")]
-        [SerializeField] private float charactersPerSecond = 30f;
-
-        private Coroutine _typingCoroutine;
-        private string _currentText;
+        private readonly Queue<string> _visibleLines = new Queue<string>();
+        private Coroutine _typingRoutine;
+        private string _currentLine;
         private bool _isTyping;
 
         public bool IsTyping => _isTyping;
 
-        public void Play(string text)
+        public event Action OnDialogueFinished;
+        [SerializeField] private DialogueRunner dialogueRunner;
+
+        public void Play(string newLine)
         {
-            if (textComponent == null)
-                return;
+            if (_typingRoutine != null)
+                StopCoroutine(_typingRoutine);
 
-            if (_typingCoroutine != null)
-                StopCoroutine(_typingCoroutine);
+            AddLineToBuffer(newLine);
 
-            _currentText = text ?? string.Empty;
-            _typingCoroutine = StartCoroutine(TypeRoutine());
+            _typingRoutine = StartCoroutine(TypeRoutine(newLine));
+        }
+
+        private void AddLineToBuffer(string line)
+        {
+            _visibleLines.Enqueue(line);
+
+            if (_visibleLines.Count > maxVisibleLines)
+                _visibleLines.Dequeue();
+        }
+
+        private IEnumerator TypeRoutine(string line)
+        {
+            _isTyping = true;
+            _currentLine = line;
+
+            string previousText = GetPreviousLinesText();
+
+            for (int i = 0; i <= line.Length; i++)
+            {
+                textUI.text = previousText + line.Substring(0, i);
+                yield return new WaitForSeconds(typingSpeed);
+            }
+
+            textUI.text = previousText + line;
+            _isTyping = false;
+            _typingRoutine = null;
+
+        }
+
+        private string GetPreviousLinesText()
+        {
+            if (_visibleLines.Count <= 1)
+                return "";
+
+            string result = "";
+            int index = 0;
+
+            foreach (var line in _visibleLines)
+            {
+                index++;
+
+                // omitimos la última porque es la actual
+                if (index == _visibleLines.Count)
+                    break;
+
+                result += line + "\n";
+            }
+
+            return result;
         }
 
         public void Skip()
@@ -38,27 +87,44 @@ namespace DialogSystem.Presentation
             if (!_isTyping)
                 return;
 
-            if (_typingCoroutine != null)
-                StopCoroutine(_typingCoroutine);
+            if (_typingRoutine != null)
+                StopCoroutine(_typingRoutine);
 
-            textComponent.text = _currentText;
+            string previousText = GetPreviousLinesText();
+            textUI.text = previousText + _currentLine;
+
             _isTyping = false;
+            _typingRoutine = null;
+
         }
 
-        private IEnumerator TypeRoutine()
+
+        private void ClearTextInternal()
         {
-            _isTyping = true;
-            textComponent.text = string.Empty;
+            if (textUI != null)
+                textUI.text = "";
 
-            float delay = 1f / Mathf.Max(1f, charactersPerSecond);
-
-            foreach (char c in _currentText)
-            {
-                textComponent.text += c;
-                yield return new WaitForSeconds(delay);
-            }
-
+            _visibleLines.Clear();
+            _currentLine = null;
             _isTyping = false;
+
+            if (_typingRoutine != null)
+            {
+                StopCoroutine(_typingRoutine);
+                _typingRoutine = null;
+            }
+        }
+
+
+
+        private void OnEnable()
+        {
+            dialogueRunner.OnDialogueFinished += ClearTextInternal;
+        }
+
+        private void OnDisable()
+        {
+            dialogueRunner.OnDialogueFinished -= ClearTextInternal;
         }
     }
 }

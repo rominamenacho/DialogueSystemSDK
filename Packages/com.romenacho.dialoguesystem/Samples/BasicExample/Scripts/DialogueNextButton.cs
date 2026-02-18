@@ -10,9 +10,12 @@ public class DialogueNextButton : MonoBehaviour
     public void OnClick()
     {
         if (typewriter.IsTyping)
+        {
             typewriter.Skip();
-        else
-            runner.Next();
+            return; // importante: no avanzar en el mismo click
+        }
+
+        runner.Next();
     }
 
 }

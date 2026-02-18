@@ -1,5 +1,4 @@
-﻿using DialogSystem.Core;
-using DialogSystem.Data;
+﻿using DialogSystem.Data;
 using DialogSystem.Interfaces;
 using DialogSystem.Localization;
 using DialogSystem.Player;
@@ -22,6 +21,11 @@ namespace DialogSystem.Bootstrap
         [SerializeField] private DialogueRunner runner;
         [SerializeField] private Presentation.TypewriterController typewriter;
 
+        [Header("Params ")]
+        [SerializeField] private string chapterCode;
+        [SerializeField] private string startBlockId;
+
+
         private void Awake()
         {
             Initialize();
@@ -41,7 +45,8 @@ namespace DialogSystem.Bootstrap
 
             // ---- LOAD STRUCTURE ----
             var structureLoader = new JsonStructureLoader();
-            DialogueChapter chapter = structureLoader.Load(structureJson, localizationDict);
+
+            var chapters = structureLoader.Load(structureJson, localizationDict);
 
             ILocalizationProvider localizationProvider =
                 new JsonLocalizationProvider(localizationDict);
@@ -58,22 +63,27 @@ namespace DialogSystem.Bootstrap
             }
 
             // ---- INIT RUNNER ----
-            runner.Initialize(chapter, localizationProvider, voiceProvider);
+            runner.Initialize(chapters, localizationProvider, voiceProvider);
 
             runner.OnLineStarted += typewriter.Play;
-            StartDialogue();
+            StartDialogue(chapterCode, startBlockId);
         }
 
-        public void StartDialogue()
+        public void StartDialogue(string chapter, string blockId = null)
         {
-            runner.StartDialogue();
+            if (string.IsNullOrEmpty(chapter))
+            {
+                Debug.LogError("DialogueBootstrap: Chapter code is null or empty.");
+                return;
+            }
+            runner.StartDialogue(chapter, blockId);
         }
 
         // New convenience method to start a specific block
-        public void StartDialogue(string blockId)
-        {
-            runner.StartDialogue(blockId);
-        }
+        /*  public void StartDialogue(string blockId)
+          {
+              runner.StartDialogue(blockId);
+          }*/
 
         public void Next()
         {

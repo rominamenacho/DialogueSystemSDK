@@ -29,6 +29,27 @@
           ]
         }
       ]
+    },
+{
+      "chapterId": "CH2",
+      "startBlockId": "END",
+      "blocks": [
+        {
+          "blockId": "END",
+          "lines": [
+            {
+              "lineId": "CH2_END_001"
+            },
+            {
+              "lineId": "CH2_END_002"
+            },
+            {
+              "lineId": "CH2_END_003"
+            }
+
+          ]
+        }
+      ]
     }
   ]
 }

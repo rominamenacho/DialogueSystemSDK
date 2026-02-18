@@ -1,6 +1,7 @@
 ﻿using DialogSystem.Core;
 using DialogSystem.Interfaces;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DialogSystem.Player
@@ -8,7 +9,7 @@ namespace DialogSystem.Player
     public sealed class DialogueRunner : MonoBehaviour, IDialogueRunner
     {
         private DialogueGraph _graph;
-        private DialogueChapter _chapter;
+        private Dictionary<string, DialogueChapter> _chapters;
         private ILocalizationProvider _localization;
         private IVoiceProvider _voice;
 
@@ -18,33 +19,29 @@ namespace DialogSystem.Player
         public bool IsRunning { get; private set; }
 
         public void Initialize(
-            DialogueChapter chapter,
-            ILocalizationProvider localizationProvider,
-            IVoiceProvider voiceProvider)
+    Dictionary<string, DialogueChapter> chapters,
+    ILocalizationProvider localizationProvider,
+    IVoiceProvider voiceProvider)
         {
-            // Defer graph creation so StartDialogue overloads can pick start block
-            _chapter = chapter ?? throw new ArgumentNullException(nameof(chapter));
+            _chapters = chapters ?? throw new ArgumentNullException(nameof(chapters));
             _localization = localizationProvider;
             _voice = voiceProvider;
         }
 
-        public void StartDialogue()
+        public void StartDialogue(string chapterId, string startBlockId = null)
         {
-            if (_chapter == null || _localization == null)
+            if (!_chapters.ContainsKey(chapterId))
+            {
+                Debug.LogError($"Chapter {chapterId} not found.");
                 return;
+            }
 
-            _graph = new DialogueGraph(_chapter);
-            IsRunning = true;
-            PlayCurrentLine();
-        }
+            var chapter = _chapters[chapterId];
 
-        // New overload: start at a specific block id
-        public void StartDialogue(string startBlockId)
-        {
-            if (_chapter == null || _localization == null)
-                return;
+            _graph = startBlockId == null
+                ? new DialogueGraph(chapter)
+                : new DialogueGraph(chapter, startBlockId);
 
-            _graph = new DialogueGraph(_chapter, startBlockId);
             IsRunning = true;
             PlayCurrentLine();
         }

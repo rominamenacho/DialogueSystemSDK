@@ -699,8 +699,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c70e140cfe6ef04797bc0efb37194fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DialogueSystem.Runtime::DialogSystem.Presentation.TypewriterController
-  textComponent: {fileID: 1538860217}
-  charactersPerSecond: 10
+  textUI: {fileID: 1538860217}
+  typingSpeed: 0.08
+  maxVisibleLines: 2
+  dialogueRunner: {fileID: 2093704425}
 --- !u!224 &1478538825
 RectTransform:
   m_ObjectHideFlags: 0
@@ -752,11 +754,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1180755930}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 302.4, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 175.51}
+  m_SizeDelta: {x: 0, y: 50}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1538860217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,7 +779,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: asasasasdsadasdasdasdadasdas
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -885,17 +887,17 @@ RectTransform:
   m_GameObject: {fileID: 1655174043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.075, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1247797581}
   m_Father: {fileID: 1180755930}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -97}
-  m_SizeDelta: {x: 160, y: 52.8}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -246, y: 105}
+  m_SizeDelta: {x: 160, y: 52.799988}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &1655174045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,6 +1028,8 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   runner: {fileID: 2093704425}
   typewriter: {fileID: 1478538824}
+  chapterCode: CH2
+  startBlockId: END
 --- !u!114 &2093704425
 MonoBehaviour:
   m_ObjectHideFlags: 0

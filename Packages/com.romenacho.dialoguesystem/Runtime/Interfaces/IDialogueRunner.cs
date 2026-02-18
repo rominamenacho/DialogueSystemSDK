@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DialogSystem.Core;
+using System;
+using System.Collections.Generic;
 
 namespace DialogSystem.Interfaces
 {
@@ -8,11 +10,11 @@ namespace DialogSystem.Interfaces
         event Action OnDialogueFinished;
 
         void Initialize(
-            Core.DialogueChapter chapter,
+            Dictionary<string, DialogueChapter> chapters,
             ILocalizationProvider localizationProvider,
             IVoiceProvider voiceProvider);
 
-        void StartDialogue();
+        void StartDialogue(string chapterId, string startBlockId = null);
         void Next();
 
         bool IsRunning { get; }

@@ -1,4 +1,4 @@
-using UnityEngine;
+using System;
 
 namespace DialogSystem.Core
 {
@@ -6,20 +6,14 @@ namespace DialogSystem.Core
     public sealed class DialogueLine
     {
         public string Id { get; }
-        public string CharacterId { get; }
-        public string TextKey { get; }
-        public string VoiceKey { get; }
+      
 
-        public DialogueLine(
-            string id,
-            string characterId,
-            string textKey,
-            string voiceKey = null)
+        public DialogueLine( string lineId)
         {
-            Id = id ?? throw new ArgumentNullException(nameof(id));
-            CharacterId = characterId;
-            TextKey = textKey ?? throw new ArgumentNullException(nameof(textKey));
-            VoiceKey = voiceKey;
+            if (string.IsNullOrWhiteSpace(lineId))
+                throw new System.ArgumentException("LineId cannot be null or empty.");
+
+            Id = lineId;
         }
     }
 

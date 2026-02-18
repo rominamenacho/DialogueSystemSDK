@@ -66,7 +66,10 @@ namespace DialogSystem.Bootstrap
             runner.Initialize(chapters, localizationProvider, voiceProvider);
 
             runner.OnLineStarted += typewriter.Play;
+            // Note: StartDialogue is called here for demonstration purposes only.
+            // For production use, remove this call and invoke it externally via button or script event.
             StartDialogue(chapterCode, startBlockId);
+
         }
 
         public void StartDialogue(string chapter, string blockId = null)
@@ -79,13 +82,7 @@ namespace DialogSystem.Bootstrap
             runner.StartDialogue(chapter, blockId);
         }
 
-        // New convenience method to start a specific block
-        /*  public void StartDialogue(string blockId)
-          {
-              runner.StartDialogue(blockId);
-          }*/
-
-        public void Next()
+         public void Next()
         {
             runner.Next();
         }

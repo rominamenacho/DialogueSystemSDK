@@ -19,10 +19,6 @@ namespace DialogSystem.Bootstrap
         [SerializeField] private DialogueRunner runner;
         [SerializeField] private Presentation.TypewriterController typewriter;
 
-        [Header("Params ")]
-        [SerializeField] private string chapterCode;
-        [SerializeField] private string startBlockId;
-
 
         private void Awake()
         {
@@ -70,22 +66,10 @@ namespace DialogSystem.Bootstrap
             runner.Initialize(chapters, localizationProvider, voiceProvider);
 
             runner.OnLineStarted += typewriter.Play;
+
             // Note: StartDialogue is called here for demonstration purposes only.
-            // For production use, remove this call and invoke it externally via button or script event.
-            StartDialogue(chapterCode, startBlockId);
-
-        }
-
-
-
-        public void StartDialogue(string chapter, string blockId = null)
-        {
-            if (string.IsNullOrEmpty(chapter))
-            {
-                Debug.LogError("DialogueBootstrap: Chapter code is null or empty.");
-                return;
-            }
-            runner.StartDialogue(chapter, blockId);
+            // For production use, remove this call and invoke it externally via button or event.
+            //  runner.StartDialogue("CH1", "INTRO");
         }
 
         public void Next()

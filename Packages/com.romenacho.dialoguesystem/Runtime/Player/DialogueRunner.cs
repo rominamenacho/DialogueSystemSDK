@@ -30,6 +30,12 @@ namespace DialogSystem.Player
 
         public void StartDialogue(string chapterId, string startBlockId = null)
         {
+            if (string.IsNullOrEmpty(chapterId))
+            {
+                Debug.LogError("DialogueBootstrap: Chapter code is null or empty.");
+                return;
+            }
+
             if (!_chapters.ContainsKey(chapterId))
             {
                 Debug.LogError($"Chapter {chapterId} not found.");

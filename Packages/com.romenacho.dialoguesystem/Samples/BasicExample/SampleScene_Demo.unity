@@ -1022,14 +1022,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81769cf10c73114e93e35bf607b1aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: DialogueSystem.Runtime::DialogSystem.Bootstrap.DialogueBootstrap
-  structureJson: {fileID: 4900000, guid: 85fe97ae80146b3469f79a02d34e9e78, type: 3}
-  localizationJson: {fileID: 4900000, guid: cf35d6a91e276ce42ab06c8b111c7afb, type: 3}
-  voiceJson: {fileID: 4900000, guid: cdcbc48a0f6b6214c817f9464a88a608, type: 3}
+  database: {fileID: 11400000, guid: ad949ff28fe48a848b6736ce1cb9f068, type: 2}
   audioSource: {fileID: 0}
   runner: {fileID: 2093704425}
   typewriter: {fileID: 1478538824}
-  chapterCode: CH2
-  startBlockId: END
+  chapterCode: CH1
+  startBlockId: INTRO
 --- !u!114 &2093704425
 MonoBehaviour:
   m_ObjectHideFlags: 0

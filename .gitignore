@@ -6,5 +6,7 @@
 /[Vv]s/
 *.csproj
 *.sln
+.vs/DialogSystemSDK/copilot-chat
 .vs/DialogSystemSDK/CopilotIndices
+.vs/DialogSystemSDK/FileContentIndex
 .vs

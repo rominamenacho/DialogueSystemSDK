@@ -17,7 +17,7 @@ namespace DialogSystem.Player
         public event Action OnDialogueFinished;
 
         public bool IsRunning { get; private set; }
-
+        public bool HasNextLine => _graph != null && _graph.HasNextLine;
         public void Initialize(
     Dictionary<string, DialogueChapter> chapters,
     ILocalizationProvider localizationProvider,

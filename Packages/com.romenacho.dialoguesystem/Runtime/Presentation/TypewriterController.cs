@@ -12,16 +12,23 @@ namespace DialogSystem.Presentation
         [SerializeField] private TMP_Text textUI;
         [SerializeField] private float typingSpeed = 0.03f;
         [SerializeField] private int maxVisibleLines = 2;
+        [SerializeField] private DialogueRunner dialogueRunner;
+
+        [SerializeField] private CanvasGroup continueIcon;
+        [SerializeField] private float fadeDuration = 0.25f;
 
         private readonly Queue<string> _visibleLines = new Queue<string>();
         private Coroutine _typingRoutine;
         private string _currentLine;
         private bool _isTyping;
 
+        private Coroutine _fadeRoutine;
         public bool IsTyping => _isTyping;
 
         public event Action OnDialogueFinished;
-        [SerializeField] private DialogueRunner dialogueRunner;
+        public event Action OnLineTypingCompleted;
+
+
 
         public void Play(string newLine)
         {
@@ -57,6 +64,8 @@ namespace DialogSystem.Presentation
             textUI.text = previousText + line;
             _isTyping = false;
             _typingRoutine = null;
+
+            OnLineTypingCompleted?.Invoke();
 
         }
 
@@ -95,7 +104,7 @@ namespace DialogSystem.Presentation
 
             _isTyping = false;
             _typingRoutine = null;
-
+            OnLineTypingCompleted?.Invoke();
         }
 
 
@@ -115,16 +124,86 @@ namespace DialogSystem.Presentation
             }
         }
 
-
+        private void Awake()
+        {
+            if (continueIcon != null)
+            {
+                continueIcon.alpha = 0f;
+                continueIcon.gameObject.SetActive(false);
+            }
+        }
 
         private void OnEnable()
         {
             dialogueRunner.OnDialogueFinished += ClearTextInternal;
+
+            OnLineTypingCompleted += ShowContinueIcon;
+            dialogueRunner.OnLineStarted += HideContinueIconFromLine;
+            dialogueRunner.OnDialogueFinished += HideContinueIcon;
         }
+
+
 
         private void OnDisable()
         {
             dialogueRunner.OnDialogueFinished -= ClearTextInternal;
+
+            OnLineTypingCompleted -= ShowContinueIcon;
+            dialogueRunner.OnLineStarted -= HideContinueIconFromLine;
+            dialogueRunner.OnDialogueFinished -= HideContinueIcon;
+        }
+
+        private void ShowContinueIcon()
+        {
+            if (!dialogueRunner.IsRunning || !dialogueRunner.HasNextLine || continueIcon == null)
+                return;
+
+            FadeIcon(1f);
+        }
+
+        private void HideContinueIcon()
+        {
+            FadeIcon(0f);
+        }
+
+        private void HideContinueIconFromLine(string _)
+        {
+            FadeIcon(0f);
+        }
+
+
+        private void FadeIcon(float targetAlpha)
+        {
+            if (continueIcon == null)
+                return;
+
+            if (_fadeRoutine != null)
+                StopCoroutine(_fadeRoutine);
+
+            _fadeRoutine = StartCoroutine(FadeRoutine(targetAlpha));
+        }
+
+        private IEnumerator FadeRoutine(float targetAlpha)
+        {
+            continueIcon.gameObject.SetActive(true);
+
+            float startAlpha = continueIcon.alpha;
+            float time = 0f;
+
+            while (time < fadeDuration)
+            {
+                time += Time.deltaTime;
+                float t = time / fadeDuration;
+                continueIcon.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
+                yield return null;
+            }
+
+            continueIcon.alpha = targetAlpha;
+
+            if (Mathf.Approximately(targetAlpha, 0f))
+                continueIcon.gameObject.SetActive(false);
+
+            _fadeRoutine = null;
         }
     }
 }

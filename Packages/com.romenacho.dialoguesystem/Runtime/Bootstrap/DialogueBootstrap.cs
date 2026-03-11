@@ -72,7 +72,7 @@ namespace DialogSystem.Bootstrap
             //  runner.StartDialogue("CH1", "INTRO");
 
             //to show dialogs wich is not on the json file, then use this:
-            runner.PlayImmediate("HELLO WORLD");
+            //   runner.PlayImmediate("HELLO WORLD");
         }
 
         public void Next()

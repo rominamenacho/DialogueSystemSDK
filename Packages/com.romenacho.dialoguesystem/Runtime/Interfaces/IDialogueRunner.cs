@@ -1,4 +1,4 @@
-﻿using DialogSystem.Core;
+using DialogSystem.Core;
 using System;
 using System.Collections.Generic;
 
@@ -16,6 +16,7 @@ namespace DialogSystem.Interfaces
 
         void StartDialogue(string chapterId, string startBlockId = null);
         void Next();
+        void PlayImmediate(string text);
 
         bool IsRunning { get; }
     }

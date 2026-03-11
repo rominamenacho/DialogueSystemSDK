@@ -70,6 +70,9 @@ namespace DialogSystem.Bootstrap
             // Note: StartDialogue is called here for demonstration purposes only.
             // For production use, remove this call and invoke it externally via button or event.
             //  runner.StartDialogue("CH1", "INTRO");
+
+            //to show dialogs wich is not on the json file, then use this:
+            runner.PlayImmediate("HELLO WORLD");
         }
 
         public void Next()

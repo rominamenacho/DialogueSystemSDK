@@ -1,4 +1,4 @@
-﻿using DialogSystem.Core;
+using DialogSystem.Core;
 using DialogSystem.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -77,6 +77,11 @@ namespace DialogSystem.Player
 
             _voice?.Play(lineId);
 
+            OnLineStarted?.Invoke(text);
+        }
+
+        public void PlayImmediate(string text)
+        {
             OnLineStarted?.Invoke(text);
         }
 

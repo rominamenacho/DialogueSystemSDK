@@ -155,7 +155,8 @@ namespace DialogSystem.Presentation
 
         private void ShowContinueIcon()
         {
-            if (!dialogueRunner.IsRunning || !dialogueRunner.HasNextLine || continueIcon == null)
+            //note: To show icon only if has next line, then add to if>  || !dialogueRunner.HasNextLine
+            if (!dialogueRunner.IsRunning || continueIcon == null)
                 return;
 
             FadeIcon(1f);

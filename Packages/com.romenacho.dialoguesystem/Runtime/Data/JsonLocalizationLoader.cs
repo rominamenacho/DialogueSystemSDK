@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Unity.Plastic.Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DialogSystem.Data

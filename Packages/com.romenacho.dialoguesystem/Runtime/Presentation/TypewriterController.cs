@@ -13,9 +13,11 @@ namespace DialogSystem.Presentation
         [SerializeField] private float typingSpeed = 0.03f;
         [SerializeField] private int maxVisibleLines = 2;
         [SerializeField] private DialogueRunner dialogueRunner;
-
         [SerializeField] private CanvasGroup continueIcon;
         [SerializeField] private float fadeDuration = 0.25f;
+
+        [SerializeField] private CanvasGroup backgroundPanel;
+        [SerializeField] private bool showBackground = true;
 
         private readonly Queue<string> _visibleLines = new Queue<string>();
         private Coroutine _typingRoutine;
@@ -34,6 +36,11 @@ namespace DialogSystem.Presentation
         {
             if (_typingRoutine != null)
                 StopCoroutine(_typingRoutine);
+
+            if (backgroundPanel != null && showBackground && !string.IsNullOrEmpty(newLine))
+            {
+                SetBackgroundActive(true);
+            }
 
             AddLineToBuffer(newLine);
 
@@ -107,6 +114,15 @@ namespace DialogSystem.Presentation
             OnLineTypingCompleted?.Invoke();
         }
 
+        private void SetBackgroundActive(bool active)
+        {
+            if (backgroundPanel != null)
+            {
+                backgroundPanel.gameObject.SetActive(active);
+                backgroundPanel.alpha = active ? 1f : 0f;
+            }
+        }
+
 
         private void ClearTextInternal()
         {
@@ -117,6 +133,8 @@ namespace DialogSystem.Presentation
             _currentLine = null;
             _isTyping = false;
 
+            SetBackgroundActive(false);
+
             if (_typingRoutine != null)
             {
                 StopCoroutine(_typingRoutine);
@@ -124,8 +142,12 @@ namespace DialogSystem.Presentation
             }
         }
 
+
+
         private void Awake()
         {
+            SetBackgroundActive(false);
+
             if (continueIcon != null)
             {
                 continueIcon.alpha = 0f;

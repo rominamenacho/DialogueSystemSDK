@@ -62,13 +62,19 @@ namespace DialogSystem.Presentation
 
             string previousText = GetPreviousLinesText();
 
+            string fullText = previousText + line;
+            textUI.text = fullText;
+
+            int previousCharCount = previousText.Length;
+            textUI.maxVisibleCharacters = previousCharCount;
+
             for (int i = 0; i <= line.Length; i++)
             {
-                textUI.text = previousText + line.Substring(0, i);
+                textUI.maxVisibleCharacters = previousCharCount + i;
                 yield return new WaitForSeconds(typingSpeed);
             }
 
-            textUI.text = previousText + line;
+            textUI.maxVisibleCharacters = int.MaxValue; // show everything
             _isTyping = false;
             _typingRoutine = null;
 
@@ -108,6 +114,7 @@ namespace DialogSystem.Presentation
 
             string previousText = GetPreviousLinesText();
             textUI.text = previousText + _currentLine;
+            textUI.maxVisibleCharacters = int.MaxValue;
 
             _isTyping = false;
             _typingRoutine = null;
@@ -127,7 +134,10 @@ namespace DialogSystem.Presentation
         private void ClearTextInternal()
         {
             if (textUI != null)
+            {
                 textUI.text = "";
+                textUI.maxVisibleCharacters = int.MaxValue;
+            }
 
             _visibleLines.Clear();
             _currentLine = null;
